@@ -258,12 +258,17 @@ const DonorAvatar = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   margin-bottom: ${({ theme }) => theme.spacing.sm};
   border: 3px solid ${({ theme }) => theme.colors.primary};
   box-shadow: ${({ theme }) => theme.shadows.small};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 `;
 
 const DonorName = styled.div`
@@ -595,7 +600,9 @@ function CommunityHub() {
           <DonorsGrid>
             {recentDonors.map(donor => (
               <DonorItem key={donor.id}>
-                <DonorAvatar src={donor.avatar} />
+                <DonorAvatar>
+                  <img src={donor.avatar} alt={`${donor.name}'s avatar`} />
+                </DonorAvatar>
                 <DonorName>{donor.name}</DonorName>
                 <DonorThankYou>Thanks for {donor.amount}!</DonorThankYou>
               </DonorItem>

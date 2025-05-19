@@ -58,13 +58,18 @@ const ProfileAvatar = styled.div`
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   border: 4px solid ${({ theme }) => theme.colors.primary};
   box-shadow: ${({ theme }) => theme.shadows.medium};
   position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
   
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     margin-bottom: 0;
@@ -906,7 +911,8 @@ function Account({ userProfile }) {
           <>
             <motion.div variants={fadeInUp}>
               <ProfileCard>
-                <ProfileAvatar src={userProfile.avatarUrl}>
+                <ProfileAvatar>
+                  <img src={userProfile.avatarUrl} alt={`${userProfile.name}'s avatar`} />
                   <EditAvatarOverlay className="edit-overlay">Change Photo</EditAvatarOverlay>
                 </ProfileAvatar>
                 <ProfileInfo>

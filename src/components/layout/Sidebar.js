@@ -66,12 +66,17 @@ const Avatar = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   margin-bottom: ${({ theme }) => theme.spacing.sm};
   border: 3px solid ${({ theme }) => theme.colors.primary};
   box-shadow: ${({ theme }) => theme.shadows.medium};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 `;
 
 const Username = styled.h2`
@@ -201,7 +206,9 @@ function Sidebar({ userProfile }) {
         </LogoContainer>
         
         <UserSection>
-          <Avatar src={userProfile.avatarUrl} />
+          <Avatar>
+            <img src={userProfile.avatarUrl} alt={`${userProfile.name}'s avatar`} />
+          </Avatar>
           <Username>{userProfile.name}</Username>
           <MembershipLevel>{userProfile.membershipLevel}</MembershipLevel>
         </UserSection>

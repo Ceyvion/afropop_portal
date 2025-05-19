@@ -397,11 +397,16 @@ const ShoutoutAvatar = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   margin-right: ${({ theme }) => theme.spacing.xs};
   border: 2px solid ${({ theme }) => theme.colors.primary};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 `;
 
 const ShoutoutText = styled.p`
@@ -662,7 +667,9 @@ function Dashboard({ userProfile }) {
             <ShoutoutContainer>
               {recentDonors.map(donor => (
                 <ShoutoutItem key={donor.id}>
-                  <ShoutoutAvatar src={donor.avatar} />
+                  <ShoutoutAvatar>
+                    <img src={donor.avatar} alt={`${donor.name}'s avatar`} />
+                  </ShoutoutAvatar>
                   <ShoutoutText>{donor.name}, thanks!</ShoutoutText>
                 </ShoutoutItem>
               ))}
