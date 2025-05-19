@@ -6,6 +6,7 @@ import App from './App';
 import GlobalStyles from './styles/GlobalStyles';
 import { lightTheme, darkTheme } from './styles/theme';
 import ThemeContext from './styles/ThemeContext';
+import { RssProvider } from './context/RssContext';
 
 function Root() {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
@@ -18,9 +19,11 @@ function Root() {
     <ThemeContext.Provider value={{ toggleTheme }}>
       <ThemeProvider theme={currentTheme}>
         <GlobalStyles />
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <RssProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </RssProvider>
       </ThemeProvider>
     </ThemeContext.Provider>
   );

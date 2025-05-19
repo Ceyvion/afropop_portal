@@ -23,7 +23,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
     "styled-components": "^5.3.10",
-    "framer-motion": "^10.12.16"
+    "framer-motion": "^10.12.16",
+    "dompurify": "^3.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
