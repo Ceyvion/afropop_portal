@@ -13,6 +13,7 @@ import Playlists from './pages/Playlists';
 import Account from './pages/Account';
 import CommunityHub from './pages/CommunityHub';
 import AdminPanel from './pages/AdminPanel';
+import AfropopFeed from './pages/AfropopFeed';
 import NotFound from './pages/NotFound';
 
 const AppWrapper = styled.div`
@@ -56,6 +57,7 @@ function App() {
           <Route path="/playlists" element={<Playlists />} />
           <Route path="/community" element={<CommunityHub />} />
           <Route path="/account" element={<Account userProfile={userProfile} />} />
+          <Route path="/feed" element={<AfropopFeed />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

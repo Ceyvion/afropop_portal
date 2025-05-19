@@ -235,6 +235,14 @@ function Sidebar({ userProfile }) {
             </NavItem>
             <NavItem>
               <motion.div variants={itemVariants}>
+                <StyledNavLink to="/feed">
+                  <NavIcon>📰</NavIcon>
+                  <NavText>Afropop Feed</NavText>
+                </StyledNavLink>
+              </motion.div>
+            </NavItem>
+            <NavItem>
+              <motion.div variants={itemVariants}>
                 <StyledNavLink to="/account">
                   <NavIcon>👤</NavIcon>
                   <NavText>My Account</NavText>
