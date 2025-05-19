@@ -22,7 +22,7 @@ The design philosophy combines modern React development practices with subtle no
 - **Exclusive Content**: Access to videos, articles, and audio recordings
 - **Playlists**: Curated music collections
 - **Community Hub**: Connect with other members through forums and events
-- **Afropop Feed**: Latest articles and episodes from Afropop.org via RSS
+- **Afropop Feed**: Latest articles and episodes from Afropop.org via RSS (uses automatic CORS proxy fallback)
 - **Account Management**: Manage membership details and preferences
 - **Admin Panel**: Content and user management for administrators
 - **Dark Mode Toggle**: Switch between light and dark themes
@@ -82,6 +82,13 @@ src/
 ├── styles/           # Global styles and theme
 └── utils/            # Utility functions
 ```
+
+## RSS CORS Handling
+
+The portal fetches Afropop's RSS feeds client-side. Because the feeds do not
+provide CORS headers, the `fetchRss` utility automatically retries requests using
+public CORS proxies. This fallback mechanism ensures the feed loads in most
+environments without requiring server-side code.
 
 ## Membership Tiers
 
