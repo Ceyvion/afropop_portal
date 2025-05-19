@@ -200,7 +200,7 @@ function AdminPanel() {
       label: 'Total Members',
       change: '+12%',
       isPositive: true,
-      color: '#FF5722'
+      color: '#4a7c59'
     },
     {
       id: 'donations',

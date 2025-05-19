@@ -8,7 +8,7 @@ import { lightTheme, darkTheme } from './styles/theme';
 import ThemeContext from './styles/ThemeContext';
 
 function Root() {
-  const [currentTheme, setCurrentTheme] = useState(lightTheme);
+  const [currentTheme, setCurrentTheme] = useState(darkTheme);
 
   const toggleTheme = () => {
     setCurrentTheme(prev => (prev === lightTheme ? darkTheme : lightTheme));
