@@ -735,7 +735,7 @@ function Account({ userProfile }) {
               <Grid.Item span={6} mobileSpan={12}>
                 <Card>
                   <SectionTitle>Yearly Contribution</SectionTitle>
-                  <div style={{ fontSize: '48px', margin: '16px 0', color: '#FF5722' }}>$325</div>
+                  <div style={{ fontSize: '48px', margin: '16px 0', color: '#4a7c59' }}>$325</div>
                   <p style={{ marginBottom: '16px' }}>Thank you for your generous support of Afropop Worldwide this year!</p>
                   <Button>Make a Donation</Button>
                 </Card>

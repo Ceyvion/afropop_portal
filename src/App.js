@@ -32,8 +32,8 @@ const AppWrapper = styled.div`
     right: 0;
     bottom: 0;
     background-image:
-      radial-gradient(circle at 20% 30%, rgba(255, 87, 34, 0.05) 0%, transparent 200px),
-      radial-gradient(circle at 80% 80%, rgba(38, 166, 154, 0.05) 0%, transparent 300px);
+      radial-gradient(circle at 20% 30%, rgba(74, 124, 89, 0.05) 0%, transparent 200px),
+      radial-gradient(circle at 80% 80%, rgba(129, 178, 154, 0.05) 0%, transparent 300px);
     z-index: -1;
   }
 `;

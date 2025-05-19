@@ -70,10 +70,14 @@ export const darkTheme = {
   ...lightTheme,
   colors: {
     ...lightTheme.colors,
-    background: '#121212',
-    cardBackground: '#1E1E1E',
+    primary: '#4a7c59',
+    primaryDark: '#2c5c37',
+    secondary: '#0f1f15',
+    accent: '#81b29a',
+    background: '#0a0f0a',
+    cardBackground: '#121a13',
     text: '#E0E0E0',
-    textLight: '#BBBBBB',
+    textLight: '#999999',
     headings: '#FFFFFF',
     divider: '#333333'
   }

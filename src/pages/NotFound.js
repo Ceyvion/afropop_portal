@@ -101,7 +101,7 @@ function NotFound() {
           animate="pulse"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-            <circle cx="50" cy="50" r="40" fill="#FF5722" />
+            <circle cx="50" cy="50" r="40" fill="#4a7c59" />
             <ellipse cx="50" cy="50" rx="20" ry="30" fill="none" stroke="#FFF" strokeWidth="3" />
             <line x1="30" y1="30" x2="70" y2="30" stroke="#FFF" strokeWidth="3" strokeLinecap="round" />
             <line x1="30" y1="70" x2="70" y2="70" stroke="#FFF" strokeWidth="3" strokeLinecap="round" />
