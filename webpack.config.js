@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -51,6 +52,15 @@ module.exports = {
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@api': path.resolve(__dirname, 'src/api')
+    },
+    fallback: {
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      url: require.resolve('url/'),
+      buffer: require.resolve('buffer/'),
+      timers: require.resolve('timers-browserify'),
+      stream: require.resolve('stream-browserify'),
+      process: require.resolve('process/browser')
     }
   },
   plugins: [
@@ -68,6 +78,13 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html'
+    }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+      Buffer: ['buffer', 'Buffer']
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
   ],
   devServer: {
