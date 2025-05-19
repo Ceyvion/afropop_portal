@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Card from '../components/ui/Card';
 import Grid from '../components/ui/Grid';
+import Modal from '../components/ui/Modal';
+import YouTubePlayer from '../components/ui/YouTubePlayer';
 
 const PageHeader = styled.header`
   margin-bottom: ${({ theme }) => theme.spacing.xl};
@@ -61,33 +63,35 @@ const fadeInUp = {
 };
 
 function ContentLibrary() {
+  const [activeVideo, setActiveVideo] = useState(null);
+
   // Mock data - in a real app, this would come from an API
   const videoCategories = [
     {
       id: 1,
       title: "Live Performances",
       items: [
-        { id: 1, title: "Fela Kuti Tribute Concert", duration: "1:12:34", thumbnail: "https://via.placeholder.com/300x169" },
-        { id: 2, title: "Malian Desert Blues Festival", duration: "48:22", thumbnail: "https://via.placeholder.com/300x169" },
-        { id: 3, title: "Pan-African Jazz Showcase", duration: "58:45", thumbnail: "https://via.placeholder.com/300x169" }
+        { id: 1, title: "Fela Kuti Tribute Concert", duration: "1:12:34", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "dQw4w9WgXcQ" },
+        { id: 2, title: "Malian Desert Blues Festival", duration: "48:22", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "xvFZjo5PgG0" },
+        { id: 3, title: "Pan-African Jazz Showcase", duration: "58:45", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "tVj0ZTS4WF4" }
       ]
     },
     {
       id: 2,
       title: "Artist Interviews",
       items: [
-        { id: 1, title: "Conversation with Youssou N'Dour", duration: "24:15", thumbnail: "https://via.placeholder.com/300x169" },
-        { id: 2, title: "Angelique Kidjo on Cultural Influences", duration: "18:42", thumbnail: "https://via.placeholder.com/300x169" },
-        { id: 3, title: "Baaba Maal: The Voice of Senegal", duration: "32:10", thumbnail: "https://via.placeholder.com/300x169" }
+        { id: 1, title: "Conversation with Youssou N'Dour", duration: "24:15", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "8ZcmTl_1ER8" },
+        { id: 2, title: "Angelique Kidjo on Cultural Influences", duration: "18:42", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "k85mRPqvMbE" },
+        { id: 3, title: "Baaba Maal: The Voice of Senegal", duration: "32:10", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "Eo-KmOd3i7s" }
       ]
     },
     {
       id: 3,
       title: "Documentaries",
       items: [
-        { id: 1, title: "The Story of Afrobeat", duration: "1:35:20", thumbnail: "https://via.placeholder.com/300x169" },
-        { id: 2, title: "African Music in the Digital Age", duration: "42:18", thumbnail: "https://via.placeholder.com/300x169" },
-        { id: 3, title: "Traditional Instruments of West Africa", duration: "50:45", thumbnail: "https://via.placeholder.com/300x169" }
+        { id: 1, title: "The Story of Afrobeat", duration: "1:35:20", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "vfkqZb8NpXg" },
+        { id: 2, title: "African Music in the Digital Age", duration: "42:18", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "oUMwu_gXK7Q" },
+        { id: 3, title: "Traditional Instruments of West Africa", duration: "50:45", thumbnail: "https://via.placeholder.com/300x169", youtubeId: "vJQ9gZm8RE0" }
       ]
     }
   ];
@@ -173,7 +177,7 @@ function ContentLibrary() {
           <Grid columns={3} gap="large" mobileColumns={1}>
             {category.items.map(item => (
               <Grid.Item key={item.id}>
-                <VideoCard>
+                <VideoCard onClick={() => setActiveVideo(item)}>
                   <img src={item.thumbnail} alt={item.title} />
                   <PlayIcon className="play-icon" />
                   <Duration>{item.duration}</Duration>
@@ -184,6 +188,15 @@ function ContentLibrary() {
           </Grid>
         </motion.div>
       ))}
+
+      <Modal isOpen={!!activeVideo} onClose={() => setActiveVideo(null)}>
+        {activeVideo && (
+          <div style={{ padding: '16px' }}>
+            <h3 style={{ marginBottom: '16px' }}>{activeVideo.title}</h3>
+            <YouTubePlayer videoId={activeVideo.youtubeId} />
+          </div>
+        )}
+      </Modal>
     </motion.div>
   );
 }
