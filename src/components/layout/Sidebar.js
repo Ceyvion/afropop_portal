@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import logo from '../../assets/logo.svg';
+import Button from '../ui/Button';
+import ThemeContext from '../../styles/ThemeContext';
 
 const SidebarWrapper = styled.aside`
   width: 260px;
@@ -160,7 +162,10 @@ const Footer = styled.div`
   color: rgba(255, 255, 255, 0.6);
   position: relative;
   z-index: 1;
-`;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  `;
 
 // Animation variants for page transitions
 const sidebarVariants = {
@@ -182,6 +187,8 @@ const itemVariants = {
 };
 
 function Sidebar({ userProfile }) {
+  const { toggleTheme } = useContext(ThemeContext);
+
   return (
     <SidebarWrapper>
       <motion.div
@@ -251,9 +258,12 @@ function Sidebar({ userProfile }) {
             </NavItem>
           </NavList>
         </Navigation>
-        
+
         <Footer>
           <p>© {new Date().getFullYear()} Afropop Worldwide</p>
+          <Button variant="secondary" onClick={toggleTheme} style={{ marginTop: '8px' }}>
+            Toggle Dark Mode
+          </Button>
         </Footer>
       </motion.div>
     </SidebarWrapper>

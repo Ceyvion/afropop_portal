@@ -1,4 +1,4 @@
-const theme = {
+export const lightTheme = {
   colors: {
     // Main colors from the reference image
     primary: '#FF5722', // Vibrant orange for primary elements
@@ -66,4 +66,15 @@ const theme = {
   },
 };
 
-export default theme;
+export const darkTheme = {
+  ...lightTheme,
+  colors: {
+    ...lightTheme.colors,
+    background: '#121212',
+    cardBackground: '#1E1E1E',
+    text: '#E0E0E0',
+    textLight: '#BBBBBB',
+    headings: '#FFFFFF',
+    divider: '#333333'
+  }
+};
