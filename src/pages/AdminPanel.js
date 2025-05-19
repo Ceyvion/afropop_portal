@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Grid from '../components/ui/Grid';
+import Input from '../components/ui/Input';
 
 const PageHeader = styled.header`
   margin-bottom: ${({ theme }) => theme.spacing.xl};
@@ -51,7 +52,9 @@ const TabButton = styled.button`
   cursor: pointer;
   position: relative;
   white-space: nowrap;
-  
+  display: flex;
+  align-items: center;
+
   &::after {
     content: '';
     position: absolute;
@@ -63,6 +66,13 @@ const TabButton = styled.button`
     opacity: ${({ active }) => active ? 1 : 0};
     transition: opacity ${({ theme }) => theme.transitions.default};
   }
+`;
+
+const TabIcon = styled.span`
+  margin-right: ${({ theme }) => theme.spacing.xs};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 // Dashboard Stats styles
@@ -99,6 +109,12 @@ const StatChange = styled.div`
   justify-content: center;
 `;
 
+const SearchBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
 // Content Management styles
 const ContentTable = styled.div`
   overflow-x: auto;
@@ -118,9 +134,13 @@ const TableHead = styled.thead`
 const TableRow = styled.tr`
   border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
   transition: background-color ${({ theme }) => theme.transitions.quick};
-  
+
+  &:nth-child(even) {
+    background-color: ${({ theme }) => `${theme.colors.primary}03`};
+  }
+
   &:hover {
-    background-color: ${({ theme }) => `${theme.colors.primary}05`};
+    background-color: ${({ theme }) => `${theme.colors.primary}08`};
   }
 `;
 
@@ -170,40 +190,57 @@ const fadeInUp = {
 function AdminPanel() {
   // Tab state
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [search, setSearch] = useState('');
   
   // Simulated data for admin panel
   const stats = [
-    { 
-      id: 'members', 
-      value: 248, 
-      label: 'Total Members', 
-      change: '+12%', 
+    {
+      id: 'members',
+      value: 248,
+      label: 'Total Members',
+      change: '+12%',
       isPositive: true,
       color: '#FF5722'
     },
-    { 
-      id: 'donations', 
-      value: '$8,239', 
-      label: 'Monthly Donations', 
-      change: '+5%', 
+    {
+      id: 'donations',
+      value: '$8,239',
+      label: 'Monthly Donations',
+      change: '+5%',
       isPositive: true,
       color: '#4CAF50'
     },
-    { 
-      id: 'content', 
-      value: 86, 
-      label: 'Content Pieces', 
-      change: '+3', 
+    {
+      id: 'content',
+      value: 86,
+      label: 'Content Pieces',
+      change: '+3',
       isPositive: true,
       color: '#2196F3'
     },
-    { 
-      id: 'events', 
-      value: 12, 
-      label: 'Upcoming Events', 
-      change: '-2', 
+    {
+      id: 'events',
+      value: 12,
+      label: 'Upcoming Events',
+      change: '-2',
       isPositive: false,
       color: '#FFC107'
+    },
+    {
+      id: 'signups',
+      value: 32,
+      label: 'New Signups',
+      change: '+8%',
+      isPositive: true,
+      color: '#9C27B0'
+    },
+    {
+      id: 'activeSubs',
+      value: 192,
+      label: 'Active Subs',
+      change: '+2%',
+      isPositive: true,
+      color: '#00BCD4'
     }
   ];
   
@@ -230,9 +267,22 @@ function AdminPanel() {
       type: 'Audio', 
       author: 'Podcast Team', 
       publishDate: '2023-06-01', 
-      status: 'scheduled'
+    status: 'scheduled'
     }
   ];
+
+  const tabs = [
+    { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+    { id: 'content', label: 'Content', icon: '📄' },
+    { id: 'members', label: 'Members', icon: '👥' },
+    { id: 'events', label: 'Events', icon: '📅' },
+    { id: 'analytics', label: 'Analytics', icon: '📈' }
+  ];
+
+  const filteredContent = contentItems.filter(item =>
+    item.title.toLowerCase().includes(search.toLowerCase()) ||
+    item.author.toLowerCase().includes(search.toLowerCase())
+  );
   
   return (
     <motion.div
@@ -247,36 +297,16 @@ function AdminPanel() {
       </PageHeader>
       
       <AdminTabs>
-        <TabButton 
-          active={activeTab === 'dashboard'} 
-          onClick={() => setActiveTab('dashboard')}
-        >
-          Dashboard
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'content'} 
-          onClick={() => setActiveTab('content')}
-        >
-          Content
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'members'} 
-          onClick={() => setActiveTab('members')}
-        >
-          Members
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'events'} 
-          onClick={() => setActiveTab('events')}
-        >
-          Events
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'analytics'} 
-          onClick={() => setActiveTab('analytics')}
-        >
-          Analytics
-        </TabButton>
+        {tabs.map(tab => (
+          <TabButton
+            key={tab.id}
+            active={activeTab === tab.id}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            <TabIcon>{tab.icon}</TabIcon>
+            {tab.label}
+          </TabButton>
+        ))}
       </AdminTabs>
       
       <motion.div variants={fadeInUp}>
@@ -297,6 +327,14 @@ function AdminPanel() {
       
       <motion.div variants={fadeInUp}>
         <SectionTitle>Recent Content</SectionTitle>
+        <SearchBar>
+          <Input
+            placeholder="Search content..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{ maxWidth: '30rem' }}
+          />
+        </SearchBar>
         <ContentTable>
           <Table>
             <TableHead>
@@ -309,17 +347,25 @@ function AdminPanel() {
               </tr>
             </TableHead>
             <tbody>
-              {contentItems.map(item => (
-                <TableRow key={item.id}>
-                  <TableCell>{item.title}</TableCell>
-                  <TableCell>{item.type}</TableCell>
-                  <TableCell>{item.author}</TableCell>
-                  <TableCell>{item.publishDate}</TableCell>
-                  <TableCell>
-                    <Badge>{item.status}</Badge>
+              {filteredContent.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan="5" style={{ textAlign: 'center', padding: '1rem' }}>
+                    No content found
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                filteredContent.map(item => (
+                  <TableRow key={item.id}>
+                    <TableCell>{item.title}</TableCell>
+                    <TableCell>{item.type}</TableCell>
+                    <TableCell>{item.author}</TableCell>
+                    <TableCell>{item.publishDate}</TableCell>
+                    <TableCell>
+                      <Badge>{item.status}</Badge>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </tbody>
           </Table>
         </ContentTable>
