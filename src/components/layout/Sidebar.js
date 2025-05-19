@@ -47,7 +47,7 @@ const LogoContainer = styled.div`
     color: white;
     margin: 0;
     letter-spacing: 1px;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
   }
 `;
 

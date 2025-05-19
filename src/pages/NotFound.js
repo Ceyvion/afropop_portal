@@ -12,10 +12,10 @@ const NotFoundContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 8rem;
+  font-size: 7rem;
   margin-bottom: ${({ theme }) => theme.spacing.md};
   color: ${({ theme }) => theme.colors.primary};
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: 6rem;

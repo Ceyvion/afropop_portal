@@ -25,17 +25,6 @@ const BaseButtonStyles = css`
   position: relative;
   overflow: hidden;
   
-  /* Subtle texture for a nostalgic feel */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 20v-1.41l1.41-1.41L4.24 20H0zm0-18.59l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM20 0v4.24l2.83-2.83L24.24 0H20zm18.59 0l-2.83 2.83-1.41-1.41L37.17 0H40v1.41zM40 20h-4.24l2.83 2.83L40 21.41V20zm0 18.59l-2.83-2.83-1.41 1.41L37.17 40H40v-1.41zM20 40v-4.24l-2.83 2.83L15.76 40H20zm-18.59 0l2.83-2.83 1.41 1.41L2.83 40H0v-1.41z'/%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-  }
 
   /* Subtle outline for depth */
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
