@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Layout Components
@@ -14,6 +14,7 @@ import Account from './pages/Account';
 import CommunityHub from './pages/CommunityHub';
 import AdminPanel from './pages/AdminPanel';
 import NotFound from './pages/NotFound';
+import Login from './pages/Login';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -39,6 +40,8 @@ const AppWrapper = styled.div`
 function App() {
   // Simulated authentication state - would come from an auth context in a real app
   const isAuthenticated = true;
+  const location = useLocation();
+  const hideSidebar = location.pathname === '/login';
   const userProfile = {
     name: 'Djamila',
     membershipLevel: 'Gold Supporter',
@@ -48,10 +51,11 @@ function App() {
 
   return (
     <AppWrapper>
-      <Sidebar userProfile={userProfile} />
+      {!hideSidebar && <Sidebar userProfile={userProfile} />}
       <MainContent>
         <Routes>
           <Route path="/" element={<Dashboard userProfile={userProfile} />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/content" element={<ContentLibrary />} />
           <Route path="/playlists" element={<Playlists />} />
           <Route path="/community" element={<CommunityHub />} />
