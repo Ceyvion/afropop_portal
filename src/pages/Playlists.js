@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Grid from '../components/ui/Grid';
+import playlistFeature from '../assets/images/playlist-feature.svg';
+import playlistDefault from '../assets/images/playlist-default.svg';
 
 const PageHeader = styled.header`
   margin-bottom: ${({ theme }) => theme.spacing.xl};
@@ -264,7 +266,7 @@ function Playlists() {
     plays: 15420,
     songs: 24,
     duration: '1h 42m',
-    coverImage: 'https://via.placeholder.com/400x400',
+    coverImage: playlistFeature,
     description: 'The definitive collection of groundbreaking Afrobeat tracks that defined a genre and changed music forever.',
     tags: ['Afrobeat', 'Classics', 'Fela Kuti', 'Tony Allen', 'Highlife']
   };
@@ -278,7 +280,7 @@ function Playlists() {
       plays: 8745,
       songs: 18,
       duration: '1h 15m',
-      coverImage: 'https://via.placeholder.com/300x300',
+      coverImage: playlistDefault,
       description: 'A journey through the hypnotic sounds of Saharan blues from Mali, Niger, and beyond.',
       tags: ['Desert Blues', 'Mali', 'Tuareg', 'Tinariwen']
     },
@@ -290,7 +292,7 @@ function Playlists() {
       plays: 6230,
       songs: 20,
       duration: '1h 22m',
-      coverImage: 'https://via.placeholder.com/300x300',
+      coverImage: playlistDefault,
       description: 'Classic Ghanaian and Nigerian highlife tracks from the 1960s and 70s that defined an era.',
       tags: ['Highlife', 'Ghana', 'Nigeria', 'Classic']
     },
@@ -302,7 +304,7 @@ function Playlists() {
       plays: 4982,
       songs: 15,
       duration: '58m',
-      coverImage: 'https://via.placeholder.com/300x300',
+      coverImage: playlistDefault,
       description: 'The unique sound of Ethiopian jazz with its distinctive scales and arrangements.',
       tags: ['Ethio-Jazz', 'Mulatu Astatke', 'Ethiopia']
     },
@@ -314,7 +316,7 @@ function Playlists() {
       plays: 12450,
       songs: 25,
       duration: '1h 35m',
-      coverImage: 'https://via.placeholder.com/300x300',
+      coverImage: playlistDefault,
       description: 'Contemporary African pop music that\'s dominating charts globally.',
       tags: ['Afropop', 'Contemporary', 'Hits']
     },
@@ -326,7 +328,7 @@ function Playlists() {
       plays: 5678,
       songs: 16,
       duration: '1h 8m',
-      coverImage: 'https://via.placeholder.com/300x300',
+      coverImage: playlistDefault,
       description: 'High-energy Congolese soukous tracks guaranteed to get you dancing.',
       tags: ['Soukous', 'Congo', 'Dance']
     },
@@ -338,7 +340,7 @@ function Playlists() {
       plays: 3421,
       songs: 14,
       duration: '52m',
-      coverImage: 'https://via.placeholder.com/300x300',
+      coverImage: playlistDefault,
       description: 'Senegalese mbalax with its distinctive sabar drums and energetic rhythms.',
       tags: ['Mbalax', 'Senegal', 'Youssou N\'Dour']
     }

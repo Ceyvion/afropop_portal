@@ -92,6 +92,17 @@ The portal supports multiple membership tiers with increasing benefits:
 - **Gold Supporter**: All previous benefits plus live events and exclusive playlists
 - **Diamond Supporter**: VIP access to all content and special recognition
 
+## Updating Media Assets
+
+Sample images used throughout the demo live in `src/assets/images`. Feel free to
+replace them with your own artwork or add additional images to this directory.
+When you update a file or add a new one, import it in the relevant component
+(for example `Playlists.js` or `ContentLibrary.js`) and reference the imported
+variable instead of an external URL.
+
+After modifying images, run `npm test` and `npm run build` to ensure everything
+still compiles correctly.
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
