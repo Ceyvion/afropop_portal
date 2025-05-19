@@ -22,6 +22,7 @@ The design philosophy combines modern React development practices with subtle no
 - **Exclusive Content**: Access to videos, articles, and audio recordings
 - **Playlists**: Curated music collections
 - **Community Hub**: Connect with other members through forums and events
+- **Afropop Feed**: Latest articles and episodes from Afropop.org via RSS
 - **Account Management**: Manage membership details and preferences
 - **Admin Panel**: Content and user management for administrators
 - **Dark Mode Toggle**: Switch between light and dark themes
