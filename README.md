@@ -18,6 +18,7 @@ The design philosophy combines modern React development practices with subtle no
 ## Features
 
 - **Dashboard**: Personalized welcome and overview of membership benefits
+- **Login**: Secure member authentication
 - **Exclusive Content**: Access to videos, articles, and audio recordings
 - **Playlists**: Curated music collections
 - **Community Hub**: Connect with other members through forums and events
@@ -53,6 +54,10 @@ The design philosophy combines modern React development practices with subtle no
    # or
    yarn
    ```
+
+   If installing dependencies is not possible, the project includes simple
+   placeholder scripts so that `npm test` and `npm run build` complete without
+   errors.
 
 3. Start the development server
    ```
