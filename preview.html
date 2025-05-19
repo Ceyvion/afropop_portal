@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afropop Member Portal Preview</title>
+  <style>
+    :root {
+      --color-primary: #FF5722;
+      --color-secondary: #0F1A2A;
+      --color-background: #F9F9F7;
+      --color-text: #333333;
+      --color-text-light: #666666;
+      --color-divider: #E0E0E0;
+      --spacing-xxs: 4px;
+      --spacing-xs: 8px;
+      --spacing-sm: 12px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-xxl: 48px;
+      --spacing-xxxl: 64px;
+      --border-radius-small: 4px;
+      --border-radius-medium: 8px;
+      --border-radius-large: 12px;
+      --border-radius-circle: 50%;
+      --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.1);
+      --shadow-large: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      font-size: 62.5%; /* 10px base size for easier rem calculations */
+      height: 100%;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1.6rem;
+      color: var(--color-text);
+      background-color: var(--color-background);
+      min-height: 100vh;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 87, 34, 0.1) 0%, transparent 300px),
+        radial-gradient(circle at 80% 80%, rgba(38, 166, 154, 0.1) 0%, transparent 400px);
+      z-index: -1;
+    }
+    
+    .sidebar {
+      width: 260px;
+      min-height: 100vh;
+      background-color: var(--color-secondary);
+      color: white;
+      padding: var(--spacing-md);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sidebar::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%2326A69A'%3E%3C/path%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%2326A69A'%3E%3C/path%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%2326A69A'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center top;
+      z-index: 0;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-xl);
+      padding: var(--spacing-md) 0;
+    }
+    
+    .logo {
+      font-size: 2.8rem;
+      color: white;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    .user-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin-bottom: var(--spacing-sm);
+      border: 3px solid var(--color-primary);
+      box-shadow: var(--shadow-medium);
+    }
+    
+    .username {
+      color: white;
+      font-size: 2.2rem;
+      margin-bottom: var(--spacing-xxs);
+      text-align: center;
+    }
+    
+    .membership-level {
+      background-color: var(--color-primary);
+      color: white;
+      padding: var(--spacing-xxs) var(--spacing-sm);
+      border-radius: var(--border-radius-small);
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .navigation {
+      margin-top: auto;
+      margin-bottom: auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .nav-list {
+      list-style: none;
+    }
+    
+    .nav-item {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: var(--spacing-sm) var(--spacing-md);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--border-radius-medium);
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .nav-link.active {
+      background-color: var(--color-primary);
+      font-weight: 500;
+    }
+    
+    .nav-link.active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: white;
+    }
+    
+    .nav-icon {
+      margin-right: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+    
+    .footer {
+      margin-top: var(--spacing-xl);
+      text-align: center;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.6);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .main-content {
+      flex: 1;
+      padding: var(--spacing-xl);
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .page-header {
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .welcome-card {
+      background-color: white;
+      border-radius: var(--border-radius-large);
+      padding: var(--spacing-xl);
+      position: relative;
+      box-shadow: var(--shadow-medium);
+      display: flex;
+      align-items: center;
+      overflow: visible;
+    }
+    
+    .welcome-text-container {
+      flex: 1;
+    }
+    
+    .welcome-name {
+      font-size: 4.2rem;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text);
+    }
+    
+    .welcome-message {
+      font-size: 1.8rem;
+      margin-bottom: var(--spacing-md);
+      max-width: 60rem;
+    }
+    
+    .progress-container {
+      margin: var(--spacing-md) 0;
+      width: 100%;
+      max-width: 60rem;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background-color: var(--color-divider);
+      border-radius: var(--border-radius-small);
+      overflow: hidden;
+      position: relative;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 65%;
+      background-color: var(--color-primary);
+      border-radius: var(--border-radius-small);
+    }
+    
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      color: var(--color-text-light);
+    }
+    
+    .drum-icon-container {
+      margin-left: var(--spacing-xl);
+    }
+    
+    .drum-icon {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-xs) var(--spacing-lg);
+      font-size: 1.6rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: var(--border-radius-medium);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--color-primary);
+      color: white;
+    }
+    
+    .button:hover {
+      background-color: #E64A19;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .section-title {
+      margin-bottom: var(--spacing-md);
+      font-size: 2.4rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-primary);
+      border-radius: var(--border-radius-small);
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xxl);
+    }
+    
+    .grid-item-8 {
+      grid-column: span 8;
+    }
+    
+    .grid-item-4 {
+      grid-column: span 4;
+    }
+    
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .media-card {
+      border-radius: var(--border-radius-medium);
+      overflow: hidden;
+      box-shadow: var(--shadow-medium);
+      cursor: pointer;
+      background-color: white;
+      position: relative;
+    }
+    
+    .media-card::before {
+      content: '';
+      display: block;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+    }
+    
+    .media-thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ddd;
+      transition: transform 0.3s ease;
+    }
+    
+    .media-card:hover .media-thumbnail {
+      transform: scale(1.05);
+    }
+    
+    .media-thumbnail::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    }
+    
+    .media-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--spacing-md);
+      color: white;
+      z-index: 1;
+    }
+    
+    .media-title {
+      font-size: 1.6rem;
+      margin-bottom: var(--spacing-xxs);
+    }
+    
+    .media-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+    
+    .play-icon-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(255, 87, 34, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    
+    .media-card:hover .play-icon-overlay {
+      opacity: 1;
+    }
+    
+    .events-calendar-card {
+      background-color: white;
+      border-radius: var(--border-radius-large);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      box-shadow: var(--shadow-medium);
+    }
+    
+    .event-list-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .calendar-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background-color: var(--color-primary);
+      color: white;
+      border-radius: var(--border-radius-small);
+      margin-right: var(--spacing-md);
+    }
+    
+    .calendar-month {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    
+    .calendar-day {
+      font-size: 2.4rem;
+      font-weight: bold;
+    }
+    
+    .event-info {
+      flex: 1;
+    }
+    
+    .event-title {
+      font-size: 1.6rem;
+      margin-bottom: var(--spacing-xxs);
+    }
+    
+    .event-details {
+      font-size: 1.4rem;
+      color: var(--color-text-light);
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo-container">
+      <h1 class="logo">AFROPOP</h1>
+    </div>
+    
+    <div class="user-section">
+      <div class="avatar"></div>
+      <h2 class="username">Djamila</h2>
+      <div class="membership-level">Gold Supporter</div>
+    </div>
+    
+    <nav class="navigation">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <span class="nav-icon">⭐</span>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon">📺</span>
+            <span>Exclusive Content</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon">🎵</span>
+            <span>Playlists</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon">👥</span>
+            <span>Community Hub</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon">👤</span>
+            <span>My Account</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span class="nav-icon">⚙️</span>
+            <span>Admin Panel</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <div class="footer">
+      <p>© 2025 Afropop Worldwide</p>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="page-header">
+      <div class="welcome-card">
+        <div class="welcome-text-container">
+          <h1 class="welcome-name">Welcome, Djamila</h1>
+          <p class="welcome-message">
+            Thank you for your support! Your contributions help us continue to celebrate and preserve the rich musical heritage of Africa.
+          </p>
+          
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="progress-label">
+              <span>Current tier: Gold Supporter</span>
+              <span>Next tier: Diamond Supporter</span>
+            </div>
+          </div>
+          
+          <button class="button">Donate Again</button>
+        </div>
+        
+        <div class="drum-icon-container">
+          <svg class="drum-icon" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="40" fill="#FF5722" />
+            <ellipse cx="50" cy="50" rx="20" ry="30" fill="none" stroke="#FFF" stroke-width="3" />
+            <line x1="30" y1="30" x2="70" y2="30" stroke="#FFF" stroke-width="3" stroke-linecap="round" />
+            <line x1="30" y1="70" x2="70" y2="70" stroke="#FFF" stroke-width="3" stroke-linecap="round" />
+            <line x1="50" y1="20" x2="50" y2="80" stroke="#FFF" stroke-width="3" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+    </header>
+    
+    <div class="grid">
+      <div class="grid-item-8">
+        <h2 class="section-title">Live Performance Videos</h2>
+        <div class="media-grid">
+          <div class="media-card">
+            <div class="media-thumbnail"></div>
+            <div class="media-info">
+              <h3 class="media-title">Afrobeat Pioneers Live</h3>
+              <p class="media-subtitle">Fela Kuti Tribute Band</p>
+            </div>
+            <div class="play-icon-overlay"></div>
+          </div>
+          
+          <div class="media-card">
+            <div class="media-thumbnail"></div>
+            <div class="media-info">
+              <h3 class="media-title">Malian Desert Blues</h3>
+              <p class="media-subtitle">Tinariwen</p>
+            </div>
+            <div class="play-icon-overlay"></div>
+          </div>
+          
+          <div class="media-card">
+            <div class="media-thumbnail"></div>
+            <div class="media-info">
+              <h3 class="media-title">South African Jazz Fusion</h3>
+              <p class="media-subtitle">Hugh Masekela Legacy</p>
+            </div>
+            <div class="play-icon-overlay"></div>
+          </div>
+          
+          <div class="media-card">
+            <div class="media-thumbnail"></div>
+            <div class="media-info">
+              <h3 class="media-title">Highlife Classics</h3>
+              <p class="media-subtitle">The Lagos Allstars</p>
+            </div>
+            <div class="play-icon-overlay"></div>
+          </div>
+        </div>
+        
+        <h2 class="section-title">Artist Interviews</h2>
+        <div class="media-grid">
+          <div class="media-card">
+            <div class="media-thumbnail"></div>
+            <div class="media-info">
+              <h3 class="media-title">Youssou N'Dour on Global Influences</h3>
+              <p class="media-subtitle">24:15</p>
+            </div>
+            <div class="play-icon-overlay"></div>
+          </div>
+          
+          <div class="media-card">
+            <div class="media-thumbnail"></div>
+            <div class="media-info">
+              <h3 class="media-title">Angelique Kidjo's Creative Process</h3>
+              <p class="media-subtitle">18:42</p>
+            </div>
+            <div class="play-icon-overlay"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid-item-4">
+        <h2 class="section-title">Upcoming Community Events</h2>
+        <div class="events-calendar-card">
+          <div class="event-list-item">
+            <div class="calendar-icon">
+              <div class="calendar-month">Jun</div>
+              <div class="calendar-day">15</div>
+            </div>
+            <div class="event-info">
+              <h4 class="event-title">Live Q&A with Seun Kuti</h4>
+              <p class="event-details">19:00 EST • Livestream</p>
+            </div>
+          </div>
+          
+          <div class="event-list-item">
+            <div class="calendar-icon">
+              <div class="calendar-month">Jun</div>
+              <div class="calendar-day">22</div>
+            </div>
+            <div class="event-info">
+              <h4 class="event-title">Sahel Sounds Documentary Watch Party</h4>
+              <p class="event-details">20:00 EST • Virtual</p>
+            </div>
+          </div>
+          
+          <div class="event-list-item">
+            <div class="calendar-icon">
+              <div class="calendar-month">Jul</div>
+              <div class="calendar-day">08</div>
+            </div>
+            <div class="event-info">
+              <h4 class="event-title">Members Mixer: NYC Edition</h4>
+              <p class="event-details">18:30 EST • In-person</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
