@@ -23,6 +23,7 @@ The design philosophy combines modern React development practices with subtle no
 - **Community Hub**: Connect with other members through forums and events
 - **Account Management**: Manage membership details and preferences
 - **Admin Panel**: Content and user management for administrators
+- **Dark Mode Toggle**: Switch between light and dark themes
 
 ## Tech Stack
 
